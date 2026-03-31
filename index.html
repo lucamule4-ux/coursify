@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Concordia Course Intel</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --bg2: #0a0a0a;
+      --card: #101010;
+      --card-soft: #161616;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --line: #242424;
+      --accent: #d4af37;
+      --accent-2: #f0d77a;
+      --good: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size: 18px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(5,5,5,.88);
+      border-bottom: 1px solid rgba(212,175,55,.16);
+    }
+
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 30px rgba(212,175,55,.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0));
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(212,175,55,.14);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(212,175,55,.28);
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+      transform: translateY(-1px);
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+      color: #000;
+      font-weight: 800;
+      box-shadow: 0 14px 30px rgba(212,175,55,.22);
+    }
+
+    .btn.primary:hover { background: linear-gradient(135deg, #c7a12a, #f3df90); }
+
+    .btn.danger {
+      background: rgba(239,68,68,.10);
+      border-color: rgba(239,68,68,.24);
+    }
+
+    .btn.danger:hover {
+      background: rgba(239,68,68,.18);
+      border-color: rgba(239,68,68,.34);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid rgba(212,175,55,.16);
+      background: rgba(212,175,55,.08);
+      color: var(--accent-2);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .featureGrid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .tripleGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card,
+    .featureCard,
+    .sampleCard,
+    .marketCard,
+    .benefitCard {
+      background: linear-gradient(180deg, rgba(16,16,16,.96), rgba(10,10,10,.92));
+      border: 1px solid rgba(212,175,55,.14);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .featureCard,
+    .sampleCard,
+    .marketCard,
+    .benefitCard {
+      padding: 28px;
+    }
+
+    .card .head {
+      padding: 18px;
+      border-bottom: 1px solid rgba(212,175,55,.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card .body { padding: 18px; }
+
+    .muted { color: var(--muted); }
+    .small { font-size: 14px; }
+
+    .sectionBlock { margin-top: 34px; }
+
+    .sectionTitle {
+      font-size: 50px;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      margin: 0;
+      text-align: center;
+    }
+
+    .sectionIntro {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.7;
+      max-width: 980px;
+      margin: 16px auto 0;
+      text-align: center;
+    }
+
+    .featureNumber {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 900;
+      color: #000;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      margin-bottom: 18px;
+    }
+
+    .featureCard h3,
+    .sampleCard h3,
+    .marketCard h3,
+    .benefitCard h3 {
+      font-size: 26px;
+      line-height: 1.25;
+      margin: 0 0 14px;
+    }
+
+    .featureCard p,
+    .sampleCard p,
+    .marketCard p,
+    .benefitCard p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(212,175,55,.12);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+      font-size: 17px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(212,175,55,.38);
+      box-shadow: 0 0 0 4px rgba(212,175,55,.10);
+      background: rgba(255,255,255,.06);
+    }
+
+    textarea { min-height: 110px; resize: vertical; }
+
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item {
+      border: 1px solid rgba(212,175,55,.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,.02);
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .chip {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(212,175,55,.18);
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      border: 1px solid rgba(212,175,55,.14);
+      background: rgba(255,255,255,.03);
+    }
+
+    .badge.good { color: #8ae7a7; border-color: rgba(34,197,94,.25); background: rgba(34,197,94,.12); }
+    .badge.warn { color: #f6cb74; border-color: rgba(245,158,11,.25); background: rgba(245,158,11,.12); }
+    .badge.bad { color: #ff8f8f; border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.12); }
+
+    .metric {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .bar {
+      width: 190px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,.12);
+    }
+
+    .fill {
+      height: 100%;
+      width: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .kpiRow {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .kpi {
+      border: 1px solid rgba(212,175,55,.12);
+      border-radius: 20px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+
+    .kpi .val {
+      font-size: 30px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .empty {
+      padding: 14px;
+      border: 1px dashed rgba(212,175,55,.22);
+      border-radius: 16px;
+      color: var(--muted);
+      background: rgba(255,255,255,.02);
+    }
+
+    .pricePill,
+    .statusPill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 90px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 800;
+      background: rgba(212,175,55,.12);
+      border: 1px solid rgba(212,175,55,.24);
+      color: var(--accent-2);
+    }
+
+    .statusPill.good { background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.24); color: #8ae7a7; }
+    .statusPill.warn { background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.24); color: #f6cb74; }
+
+    .benefitList {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .benefitLine {
+      font-size: 22px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .benefitLine strong { color: var(--text); }
+
+    .footer {
+      padding: 26px 18px 40px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    @media (max-width: 1100px) {
+      .featureGrid { grid-template-columns: repeat(2, 1fr); }
+      .tripleGrid { grid-template-columns: 1fr; }
+      .benefitList { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .kpiRow { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .featureGrid { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .sectionTitle { font-size: 36px; }
+      .sectionIntro { font-size: 18px; }
+      body { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="row" style="justify-content:space-between;">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:24px;">Concordia Course Intel</div>
+            <div class="muted small">Textbooks, workload, tips, and student listings</div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn" data-route="home">Home</button>
+          <button class="btn" data-route="courses">Courses</button>
+          <button class="btn" data-route="submit">Submit</button>
+          <button class="btn" data-route="about">About</button>
+          <button class="btn" id="studentBadge">Not signed in</button>
+          <button class="btn danger" id="logoutBtn" title="Log out">Log out</button>
+          <button class="btn danger" id="resetBtn" title="Clears local data">Reset Data</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <div class="footer">
+    This MVP stores data in your browser only using localStorage. It is a front-end prototype, not a secure production app.
+  </div>
+
+  <script>
+    const STORAGE_KEY = "cci_mvp_v3";
+    const SESSION_KEY = "cci_student_session_v3";
+
+    function cryptoRandomId() {
+      try {
+        return [...crypto.getRandomValues(new Uint8Array(10))].map(b => b.toString(16).padStart(2, "0")).join("");
+      } catch (e) {
+        return Math.random().toString(16).slice(2) + Date.now().toString(16);
+      }
+    }
+
+    const seed = {
+      courses: [
+        { id:"COMM-205", title:"Business Communication", dept:"COMM", code:"205", credits:3, prerequisite:"ECON 203 previously or concurrently.", tags:["JMSB","Core","Communication"], description:"Theory and practice of effective business communications and basic project management skills." },
+        { id:"COMM-210", title:"Contemporary Business Thinking", dept:"COMM", code:"210", credits:3, prerequisite:"COMM 205 and ECON 201 or ECON 203 or equivalent previously or concurrently.", tags:["JMSB","Core","Business"], description:"Broad survey of business with emphasis on critical perspective, business literature, and group work." },
+        { id:"COMM-211", title:"Global Business Environment", dept:"COMM", code:"211", credits:3, prerequisite:"ECON 201 and ECON 203 or equivalent previously or concurrently.", tags:["JMSB","Core","International"], description:"Introduction to globalization, international business, trade, foreign exchange, and entry strategies." },
+        { id:"COMM-213", title:"Computing and Visualization Tools for Business Analytics", dept:"COMM", code:"213", credits:1.5, prerequisite:"ECON 201 previously or concurrently.", tags:["JMSB","Core","Analytics"], description:"Business analytics tools, data manipulation, visualization, and dashboard basics." },
+        { id:"COMM-214", title:"Business Analytics", dept:"COMM", code:"214", credits:3, prerequisite:"MATH 208 and MATH 209 previously; COMM 213 previously or concurrently.", tags:["JMSB","Core","Analytics"], description:"Fundamentals of analytics, exploratory data analysis, prediction modelling, and visualization for business." },
+        { id:"COMM-215", title:"Business Statistics", dept:"COMM", code:"215", credits:3, prerequisite:"MATH 208 or equivalent and MATH 209 or equivalent previously; BTM 200 or COMP 248 or equivalent previously or concurrently.", tags:["JMSB","Core","Quantitative"], description:"Statistics for business including probability, estimation, hypothesis testing, regression, and correlation." },
+        { id:"COMM-216", title:"Ethics, Business Sustainability, and Social Responsibility", dept:"COMM", code:"216", credits:1.5, prerequisite:"COMM 205 and COMM 214 previously or concurrently.", tags:["JMSB","Core","Ethics"], description:"Business and society, stakeholder theory, sustainability, and ethical decision-making." },
+        { id:"COMM-217", title:"Financial Accounting", dept:"COMM", code:"217", credits:3, prerequisite:"COMM 211 previously or concurrently.", tags:["JMSB","Core","Accounting"], description:"Introductory financial accounting with emphasis on measuring, reporting, and analyzing financial information." },
+        { id:"COMM-219", title:"Innovation Management", dept:"COMM", code:"219", credits:1.5, prerequisite:"COMM 205 previously or concurrently.", tags:["JMSB","Core","Innovation"], description:"Innovation fundamentals, creativity, value creation, and innovative thinking in organizations." },
+        { id:"COMM-220", title:"Analysis of Markets", dept:"COMM", code:"220", credits:3, prerequisite:"COMM 210, COMM 215, and ECON 201 previously; ECON 203 previously or concurrently.", tags:["JMSB","Core","Economics"], description:"Canadian and international product, labour, and financial markets, including regulation and market behaviour." },
+        { id:"COMM-221", title:"Financial Markets", dept:"COMM", code:"221", credits:3, prerequisite:"ECON 201 previously; ECON 203 and COMM 214 previously or concurrently.", tags:["JMSB","Finance"], description:"Time value of money, risk and return, portfolio formation, and pricing of risky assets." },
+        { id:"COMM-222", title:"Organizational Behaviour and Theory", dept:"COMM", code:"222", credits:3, prerequisite:"COMM 205 and COMM 210 previously.", tags:["JMSB","Management"], description:"Individual, group, and organizational behaviour including motivation, leadership, and structure." },
+        { id:"COMM-223", title:"Marketing Management", dept:"COMM", code:"223", credits:3, prerequisite:"COMM 211 and COMM 219 previously or concurrently.", tags:["JMSB","Marketing"], description:"Marketing strategy, branding, segmentation, buyer behaviour, pricing, channels, and communications." },
+        { id:"COMM-225", title:"Production and Operations Management", dept:"COMM", code:"225", credits:3, prerequisite:"COMM 205, COMM 211, and COMM 214 previously.", tags:["JMSB","Operations"], description:"Operations strategy, forecasting, materials management, quality, and quantitative decision tools." },
+        { id:"COMM-226", title:"Business Technology Management", dept:"COMM", code:"226", credits:3, prerequisite:"COMM 211 previously or concurrently.", tags:["JMSB","Technology"], description:"Business value of information technology, digital tools, and process digitization." },
+        { id:"COMM-227", title:"Interpersonal and Critical Thinking Skills", dept:"COMM", code:"227", credits:3, prerequisite:"COMM 205 previously.", tags:["JMSB","Skills"], description:"Interpersonal processes, teamwork, leadership, conflict management, and critical thinking." },
+        { id:"COMM-229", title:"Managing People in Organizations", dept:"COMM", code:"229", credits:3, prerequisite:"COMM 227 previously or concurrently; or MANA 201 and MANA 202.", tags:["JMSB","Human Resources"], description:"Human resource management systems including recruitment, performance, rewards, training, and safety." },
+        { id:"COMM-299", title:"Special Topics in Business", dept:"COMM", code:"299", credits:3, prerequisite:"", tags:["JMSB","Special Topics"], description:"Special topic course in business that varies by offering." },
+        { id:"COMM-305", title:"Managerial Accounting", dept:"COMM", code:"305", credits:3, prerequisite:"COMM 213 or COMM 215 previously; COMM 217 previously.", tags:["JMSB","Accounting"], description:"Managerial accounting tools, cost techniques, planning, control, and business decision-making." },
+        { id:"COMM-308", title:"Introduction to Finance", dept:"COMM", code:"308", credits:3, prerequisite:"COMM 217 previously; COMM 220 previously or concurrently.", tags:["JMSB","Finance"], description:"Finance theory for financing and investment decisions, valuation, cost of capital, and capital budgeting." },
+        { id:"COMM-309", title:"Business Finance", dept:"COMM", code:"309", credits:3, prerequisite:"COMM 217 previously or concurrently; COMM 221 previously.", tags:["JMSB","Finance"], description:"Investment and financing decisions, mergers, capital structure, working capital, and cost of capital." },
+        { id:"COMM-315", title:"Business Law and Ethics", dept:"COMM", code:"315", credits:3, prerequisite:"COMM 308 previously.", tags:["JMSB","Law","Ethics"], description:"Legal and ethical issues in business organizations through laws, principles, and case judgments." },
+        { id:"COMM-316", title:"Business Law and Ethics", dept:"COMM", code:"316", credits:1.5, prerequisite:"COMM 216 previously or concurrently.", tags:["JMSB","Law","Ethics"], description:"Contract law, civil liability, employment law, corporate law, governance, and workplace ethics." },
+        { id:"COMM-320", title:"Entrepreneurship", dept:"COMM", code:"320", credits:3, prerequisite:"COMM 223 or COMM 224, COMM 227, COMM 305, and COMM 309 previously.", tags:["JMSB","Entrepreneurship"], description:"Creating, developing, and sustaining new ventures or major growth initiatives within organizations." },
+        { id:"COMM-401", title:"Strategic Management", dept:"COMM", code:"401", credits:3, prerequisite:"45 business credits including COMM 225 and COMM 229; COMM 226 or COMM 301; and COMM 316 plus COMM 320 previously or concurrently.", tags:["JMSB","Capstone","Strategy"], description:"Capstone course on competitive advantage, strategic analysis, corporate strategy, and decision-making." },
+        { id:"COMM-499", title:"Seminar Course", dept:"COMM", code:"499", credits:3, prerequisite:"To be determined each academic year.", tags:["JMSB","Seminar"], description:"Seminar course focused on a specialized topic within the discipline." }
+      ],
+      reviews: [
+        {
+          id: cryptoRandomId(),
+          courseId: "COMM-217",
+          professor: "Example Prof",
+          term: "Fall 2025",
+          textbookUse: "Used heavily",
+          workload: "Heavy",
+          rating: 4,
+          difficulty: 4,
+          workloadScore: 4,
+          textbookValue: "yes",
+          notes: "Textbook problems were useful for practice. Slides alone were not enough.",
+          resources: "Tutorials and practice sets were key.",
+          createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6
+        },
+        {
+          id: cryptoRandomId(),
+          courseId: "COMM-223",
+          professor: "Example Prof",
+          term: "Winter 2025",
+          textbookUse: "Barely used",
+          workload: "Moderate",
+          rating: 3,
+          difficulty: 2,
+          workloadScore: 2,
+          textbookValue: "no",
+          notes: "Slides and class examples covered most exams. I would wait before buying the book.",
+          resources: "Case summaries and group notes helped.",
+          createdAt: Date.now() - 1000 * 60 * 60 * 24 * 20
+        }
+      ],
+      listings: [
+        {
+          id: cryptoRandomId(),
+          courseId: "COMM-217",
+          title: "Financial Accounting Textbook",
+          condition: "Good",
+          price: 35,
+          contact: "Message me via Discord: example#1234",
+          notes: "No markings. Pickup downtown.",
+          createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4
+        }
+      ]
+    };
+
+    function loadStore() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
+          return JSON.parse(JSON.stringify(seed));
+        }
+        return JSON.parse(raw);
+      } catch (e) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
+        return JSON.parse(JSON.stringify(seed));
+      }
+    }
+
+    function saveStore(store) { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
+
+    function loadSession() {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function saveSession(session) { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); }
+    function clearSession() { localStorage.removeItem(SESSION_KEY); }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function formatDate(ts) {
+      const d = new Date(ts);
+      return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    }
+
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+    function avg(arr) { return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0; }
+
+    function mostCommon(arr) {
+      const clean = arr.filter(Boolean);
+      if (!clean.length) return "";
+      const counts = new Map();
+      clean.forEach(x => counts.set(x, (counts.get(x) || 0) + 1));
+      let best = clean[0];
+      let bestN = -1;
+      for (const [k, v] of counts.entries()) {
+        if (v > bestN) { best = k; bestN = v; }
+      }
+      return best;
+    }
+
+    function badgeForTextbookUse(val) {
+      const v = (val || "").toLowerCase();
+      if (v.includes("not used")) return ["good", "Not used"];
+      if (v.includes("barely")) return ["warn", "Barely used"];
+      if (v.includes("occasion")) return ["warn", "Used occasionally"];
+      if (v.includes("heav")) return ["bad", "Used heavily"];
+      return ["warn", val || "Unknown"];
+    }
+
+    function badgeForWorkload(val) {
+      const v = (val || "").toLowerCase();
+      if (v.includes("light")) return ["good", "Light"];
+      if (v.includes("moder")) return ["warn", "Moderate"];
+      if (v.includes("heavy")) return ["bad", "Heavy"];
+      return ["warn", val || "Unknown"];
+    }
+
+    function ratingBar(r) {
+      const pct = clamp((r || 0) / 5 * 100, 0, 100);
+      return `
+        <div class="metric">
+          <span class="mono">${(r || 0).toFixed(1)}/5</span>
+          <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
+        </div>
+      `;
+    }
+
+    const app = document.getElementById("app");
+    let store = loadStore();
+    let currentStudent = loadSession();
+
+    const routes = {
+      home: renderHome,
+      courses: renderCourses,
+      course: renderCourse,
+      submit: renderSubmit,
+      about: renderAbout
+    };
+
+    function makeUrl(route, params) {
+      const url = new URL(location.href);
+      url.searchParams.set("route", route);
+      Object.entries(params || {}).forEach(([k, v]) => url.searchParams.set(k, v));
+      return url.pathname + url.search;
+    }
+
+    function navigate(route, params = {}) {
+      history.pushState({ route, params }, "", makeUrl(route, params));
+      render();
+    }
+
+    function readUrl() {
+      const url = new URL(location.href);
+      const route = url.searchParams.get("route") || "home";
+      const params = {};
+      for (const [k, v] of url.searchParams.entries()) {
+        if (k !== "route") params[k] = v;
+      }
+      return { route, params };
+    }
+
+    function courseById(id) { return store.courses.find(c => c.id === id); }
+
+    function refreshStudentBadge() {
+      const badge = document.getElementById("studentBadge");
+      if (!badge) return;
+      badge.textContent = currentStudent ? `${currentStudent.name} (${currentStudent.studentId})` : "Not signed in";
+    }
+
+    window.addEventListener("popstate", render);
+
+    document.querySelectorAll("[data-route]").forEach(btn => {
+      btn.addEventListener("click", () => navigate(btn.dataset.route));
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      clearSession();
+      currentStudent = null;
+      refreshStudentBadge();
+      render();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if (confirm("This will clear all saved reviews, listings, and custom courses in this browser. Continue?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(SESSION_KEY);
+        store = loadStore();
+        currentStudent = null;
+        render();
+      }
+    });
+
+    function render() {
+      refreshStudentBadge();
+      if (!currentStudent) {
+        renderLogin();
+        return;
+      }
+      const { route, params } = readUrl();
+      const fn = routes[route] || routes.home;
+      fn(params);
+    }
+
+    function renderLogin() {
+      app.innerHTML = `
+        <section class="card" style="max-width:980px; margin:34px auto 0; overflow:visible;">
+          <div class="body" style="padding:0;">
+            <div class="grid" style="grid-template-columns: 1.1fr .9fr; gap:0; margin-top:0;">
+              <div style="padding:34px; position:relative; overflow:hidden; border-right:1px solid rgba(212,175,55,.12);">
+                <div style="position:relative; z-index:1;">
+                  <div class="pill" style="margin-bottom:14px;">Concordia student platform</div>
+                  <h1 style="font-size:56px; line-height:1.02; margin:0 0 14px; letter-spacing:-.03em;">Course intel that helps before you spend.</h1>
+                  <div class="muted" style="font-size:20px; line-height:1.7; max-width:540px;">
+                    Track courses, see textbook usefulness, compare workload, review prerequisites, and find cheaper used books from other students.
+                  </div>
+                  <div class="chips" style="margin-top:18px;">
+                    <span class="chip">Textbook value</span>
+                    <span class="chip">Workload insight</span>
+                    <span class="chip">Student marketplace</span>
+                    <span class="chip">Course tips</span>
+                  </div>
+                </div>
+              </div>
+              <div style="padding:34px; display:flex; align-items:center;">
+                <div style="width:100%;">
+                  <h2 style="font-size:34px; margin-bottom:8px;">Student login</h2>
+                  <div class="muted" style="margin-bottom:18px; font-size:17px;">Enter your details to access the platform.</div>
+
+                  <label>Full name</label>
+                  <input id="loginName" placeholder="Example: Sarah Chen" />
+
+                  <label>Student ID</label>
+                  <input id="loginStudentId" placeholder="Example: 40212345" />
+
+                  <label>Program or faculty (optional)</label>
+                  <input id="loginProgram" placeholder="Example: JMSB, Engineering, Arts and Science" />
+
+                  <div class="row" style="margin-top:18px; justify-content:space-between; align-items:center;">
+                    <div class="muted small">Demo login stored in your browser</div>
+                    <button class="btn primary" id="loginBtn">Enter platform</button>
+                  </div>
+
+                  <div id="loginMsg" style="margin-top:12px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        const name = (document.getElementById("loginName").value || "").trim();
+        const studentId = (document.getElementById("loginStudentId").value || "").trim();
+        const program = (document.getElementById("loginProgram").value || "").trim();
+        const msg = document.getElementById("loginMsg");
+
+        if (!name || !studentId) {
+          msg.innerHTML = `<div class="empty">Name and student ID are required.</div>`;
+          return;
+        }
+
+        currentStudent = { name, studentId, program };
+        saveSession(currentStudent);
+        refreshStudentBadge();
+        navigate("home");
+      });
+    }
+
+    function renderHome() {
+      const reviewCount = store.reviews.length;
+      const listingCount = store.listings.length;
+      const courseCount = store.courses.length;
+      const mostReviewed = [...store.courses]
+        .map(c => ({ course: c, count: store.reviews.filter(r => r.courseId === c.id).length }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 3);
+
+      app.innerHTML = `
+        <div class="grid">
+          <section class="card">
+            <div class="head">
+              <div>
+                <h2 style="font-size:44px; line-height:1.05; margin:0;">Know before you buy</h2>
+                <div class="muted" style="margin-top:10px; font-size:22px; line-height:1.7; max-width:780px;">
+                  Student-powered course intel for Concordia. See textbook value, workload, student tips, prerequisites, and cheaper used book options before spending money.
+                </div>
+              </div>
+              <div class="row">
+                <button class="btn primary" id="goCourses">Browse courses</button>
+                <button class="btn" id="goSubmit">Add a review</button>
+              </div>
+            </div>
+            <div class="body">
+              <div class="kpiRow">
+                <div class="kpi"><div class="muted small">Courses</div><div class="val">${courseCount}</div></div>
+                <div class="kpi"><div class="muted small">Reviews</div><div class="val">${reviewCount}</div></div>
+                <div class="kpi"><div class="muted small">Listings</div><div class="val">${listingCount}</div></div>
+              </div>
+
+              <div style="margin-top:22px;">
+                <h3 style="font-size:28px; margin:0;">Top activity</h3>
+                <div class="muted" style="margin-top:8px; font-size:18px;">Most reviewed courses in this dataset.</div>
+                <div class="list" style="margin-top:14px;">
+                  ${mostReviewed.map(x => `
+                    <div class="item">
+                      <div>
+                        <div style="font-weight:800; font-size:22px;">${esc(x.course.id)} <span class="muted">•</span> ${esc(x.course.title)}</div>
+                        <div class="chips">
+                          ${x.course.tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+                          ${x.course.credits ? `<span class="chip">${esc(x.course.credits)} credits</span>` : ""}
+                          <span class="chip">${x.count} review(s)</span>
+                        </div>
+                      </div>
+                      <div><button class="btn" data-open-course="${esc(x.course.id)}">Open</button></div>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="card">
+            <div class="head">
+              <div>
+                <h3 style="font-size:28px; margin:0;">Quick search</h3>
+                <div class="muted" style="margin-top:8px; font-size:18px;">Search by course code like COMM 217.</div>
+              </div>
+            </div>
+            <div class="body">
+              <label for="q">Search</label>
+              <input id="q" placeholder="Example: COMM 217" />
+              <div class="row" style="margin-top:14px; justify-content:flex-end;">
+                <button class="btn primary" id="searchBtn">Search</button>
+              </div>
+              <div id="searchResults" style="margin-top:16px;"></div>
+            </div>
+          </aside>
+        </div>
+
+        <section class="sectionBlock">
+          <div class="benefitCard">
+            <h2 style="font-size:36px; margin:0 0 10px;">Why students would use this</h2>
+            <div class="benefitList">
+              <p class="benefitLine"><strong>Before the semester:</strong> Check whether course materials are actually needed.</p>
+              <p class="benefitLine"><strong>During add/drop:</strong> Compare workload and expectations quickly.</p>
+              <p class="benefitLine"><strong>On a budget:</strong> Find cheaper used copies from other students.</p>
+              <p class="benefitLine"><strong>When studying:</strong> Discover notes, tips, and alternative resources.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="sectionBlock">
+          <h2 class="sectionTitle">Main features</h2>
+          <div class="sectionIntro">A real student platform layout you can keep building into a full course and textbook ecosystem.</div>
+          <div class="featureGrid">
+            <div class="featureCard"><div class="featureNumber">1</div><h3>Course insights</h3><p>Students can search courses and see textbook usefulness, workload level, credits, prerequisites, and course expectations.</p></div>
+            <div class="featureCard"><div class="featureNumber">2</div><h3>Textbook marketplace</h3><p>Students can buy and sell used textbooks at lower prices instead of paying full bookstore cost.</p></div>
+            <div class="featureCard"><div class="featureNumber">3</div><h3>Student reviews</h3><p>Past students can share honest advice about what mattered in the course and which resources helped most.</p></div>
+            <div class="featureCard"><div class="featureNumber">4</div><h3>Study resources</h3><p>One place for notes, links, exam tips, and alternative resources that improve course accessibility.</p></div>
+          </div>
+        </section>
+
+        <section class="sectionBlock">
+          <h2 class="sectionTitle">Sample course pages</h2>
+          <div class="sectionIntro">Each course can have its own page with textbook value, workload, credits, prerequisites, and student tips.</div>
+          <div class="tripleGrid">
+            <div class="sampleCard">
+              <div style="display:flex; justify-content:space-between; gap:16px; align-items:flex-start;">
+                <div><h3>COMM 205</h3><p style="margin-top:12px;">Business Communication</p></div>
+                <span class="statusPill warn">Book optional</span>
+              </div>
+              <p style="margin-top:16px;"><strong style="color:var(--text);">Credits:</strong> 3</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">Professor style:</strong> Writing-heavy with team assignments</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">Workload:</strong> Medium</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">What students say:</strong> Wait a week before buying materials</p>
+            </div>
+            <div class="sampleCard">
+              <div style="display:flex; justify-content:space-between; gap:16px; align-items:flex-start;">
+                <div><h3>COMM 217</h3><p style="margin-top:12px;">Financial Accounting</p></div>
+                <span class="statusPill good">Book useful</span>
+              </div>
+              <p style="margin-top:16px;"><strong style="color:var(--text);">Credits:</strong> 3</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">Professor style:</strong> Follows exercises closely</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">Workload:</strong> Medium to high</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">What students say:</strong> Buying the book or finding a cheap copy helps</p>
+            </div>
+            <div class="sampleCard">
+              <div style="display:flex; justify-content:space-between; gap:16px; align-items:flex-start;">
+                <div><h3>COMM 223</h3><p style="margin-top:12px;">Marketing Management</p></div>
+                <span class="statusPill warn">Barely used</span>
+              </div>
+              <p style="margin-top:16px;"><strong style="color:var(--text);">Credits:</strong> 3</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">Professor style:</strong> Mostly slides and case discussions</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">Workload:</strong> Low to medium</p>
+              <p style="margin-top:10px;"><strong style="color:var(--text);">What students say:</strong> Wait before buying the textbook</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="sectionBlock">
+          <h2 class="sectionTitle">Textbook marketplace</h2>
+          <div class="sectionIntro">A simple marketplace section where students can post and browse affordable listings.</div>
+          <div class="tripleGrid">
+            <div class="marketCard">
+              <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start;">
+                <div><h3>Financial Accounting Textbook</h3><p style="margin-top:12px;">For COMM 217</p></div>
+                <span class="pricePill">$35</span>
+              </div>
+              <p style="margin-top:16px;">Condition: Good</p>
+              <p style="margin-top:8px;">Pickup: Sir George Williams campus</p>
+              <div class="chips" style="margin-top:14px;"><span class="chip">Used</span><span class="chip">Negotiable</span></div>
+            </div>
+            <div class="marketCard">
+              <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start;">
+                <div><h3>Business Communication Book</h3><p style="margin-top:12px;">For COMM 205</p></div>
+                <span class="pricePill">$25</span>
+              </div>
+              <p style="margin-top:16px;">Condition: Very good</p>
+              <p style="margin-top:8px;">Pickup: Loyola or downtown</p>
+              <div class="chips" style="margin-top:14px;"><span class="chip">Highlighted notes</span><span class="chip">Fast pickup</span></div>
+            </div>
+            <div class="marketCard">
+              <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start;">
+                <div><h3>Marketing Principles</h3><p style="margin-top:12px;">For COMM 223</p></div>
+                <span class="pricePill">$20</span>
+              </div>
+              <p style="margin-top:16px;">Condition: Fair</p>
+              <p style="margin-top:8px;">Seller: Student near Concordia metro</p>
+              <div class="chips" style="margin-top:14px;"><span class="chip">Budget option</span><span class="chip">Quick meet-up</span></div>
+            </div>
+          </div>
+        </section>
+      `;
+
+      document.getElementById("goCourses").onclick = () => navigate("courses");
+      document.getElementById("goSubmit").onclick = () => navigate("submit");
+
+      app.querySelectorAll("[data-open-course]").forEach(b => {
+        b.addEventListener("click", () => navigate("course", { id: b.dataset.openCourse }));
+      });
+
+      const q = document.getElementById("q");
+      const sr = document.getElementById("searchResults");
+      document.getElementById("searchBtn").onclick = () => {
+        const term = (q.value || "").trim().toLowerCase();
+        const hits = store.courses.filter(c => `${c.dept} ${c.code}`.toLowerCase().includes(term) || c.id.toLowerCase().includes(term) || c.title.toLowerCase().includes(term));
+        if (!term) { sr.innerHTML = `<div class="empty">Type a course code to search.</div>`; return; }
+        if (!hits.length) { sr.innerHTML = `<div class="empty">No matches found.</div>`; return; }
+
+        sr.innerHTML = `
+          <div class="list">
+            ${hits.slice(0, 6).map(c => `
+              <div class="item">
+                <div>
+                  <div style="font-weight:800; font-size:21px;">${esc(c.id)} <span class="muted">•</span> ${esc(c.title)}</div>
+                  <div class="chips">
+                    ${c.tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+                    ${c.credits ? `<span class="chip">${esc(c.credits)} credits</span>` : ""}
+                  </div>
+                </div>
+                <button class="btn" data-open-course="${esc(c.id)}">Open</button>
+              </div>
+            `).join("")}
+          </div>
+        `;
+
+        sr.querySelectorAll("[data-open-course]").forEach(b => {
+          b.addEventListener("click", () => navigate("course", { id: b.dataset.openCourse }));
+        });
+      };
+    }
+
+    function renderCourses() {
+      app.innerHTML = `
+        <section class="card">
+          <div class="head">
+            <div>
+              <h2 style="font-size:38px; margin:0;">Courses</h2>
+              <div class="muted" style="margin-top:8px; font-size:18px;">Browse built-in COMM courses or add custom courses students want to track.</div>
+            </div>
+            <div style="min-width:280px; width:360px; max-width:100%;">
+              <input id="filter" placeholder="Filter by code or title" />
+            </div>
+          </div>
+          <div class="body">
+            <div class="card" style="margin-bottom:18px; background: rgba(255,255,255,.02); box-shadow:none;">
+              <div class="head">
+                <div>
+                  <h3 style="font-size:28px; margin:0;">Add your own course</h3>
+                  <div class="muted" style="margin-top:8px; font-size:18px;">Keep this section so students can add classes beyond the built-in list.</div>
+                </div>
+              </div>
+              <div class="body">
+                <div class="split">
+                  <div><label>Department</label><input id="newDept" placeholder="Example: COMM" /></div>
+                  <div><label>Course number</label><input id="newCode" placeholder="Example: 305" /></div>
+                </div>
+                <div class="split">
+                  <div><label>Course title</label><input id="newTitle" placeholder="Example: Managerial Accounting" /></div>
+                  <div><label>Tags</label><input id="newTags" placeholder="Example: Core, Accounting, Midterm-heavy" /></div>
+                </div>
+                <div class="split">
+                  <div><label>Credits</label><input id="newCredits" type="number" min="0" step="0.5" placeholder="Example: 3" /></div>
+                  <div><label>Prerequisite/Corequisite</label><input id="newPrerequisite" placeholder="Example: COMM 217 previously" /></div>
+                </div>
+                <label>Description</label>
+                <textarea id="newDescription" placeholder="Write a short description of the course."></textarea>
+                <div class="row" style="margin-top:14px; justify-content:flex-end;"><button class="btn primary" id="saveCourse">Add course</button></div>
+                <div id="courseMsg" style="margin-top:12px;"></div>
+              </div>
+            </div>
+            <div id="courseList" class="list"></div>
+          </div>
+        </section>
+      `;
+
+      const listEl = document.getElementById("courseList");
+      const filter = document.getElementById("filter");
+
+      function paint() {
+        const term = (filter.value || "").trim().toLowerCase();
+        const courses = store.courses.filter(c => !term || c.id.toLowerCase().includes(term) || c.title.toLowerCase().includes(term) || `${c.dept} ${c.code}`.toLowerCase().includes(term)).sort((a, b) => a.id.localeCompare(b.id));
+        if (!courses.length) { listEl.innerHTML = `<div class="empty">No courses match your search.</div>`; return; }
+
+        listEl.innerHTML = courses.map(c => {
+          const rs = store.reviews.filter(r => r.courseId === c.id);
+          const ls = store.listings.filter(l => l.courseId === c.id);
+          const avgRating = avg(rs.map(r => r.rating));
+          const avgDifficulty = avg(rs.map(r => Number(r.difficulty || 0)).filter(Boolean));
+          const usefulCount = rs.filter(r => String(r.textbookValue || "").toLowerCase() === "yes").length;
+          const usefulnessPct = rs.length ? Math.round((usefulCount / rs.length) * 100) : 0;
+          const topTextbook = mostCommon(rs.map(r => r.textbookUse));
+          const topWorkload = mostCommon(rs.map(r => r.workload));
+          const [tbClass, tbText] = badgeForTextbookUse(topTextbook);
+          const [wlClass, wlText] = badgeForWorkload(topWorkload);
+
+          return `
+            <div class="item">
+              <div style="flex:1 1 620px;">
+                <div style="font-weight:900; font-size:22px;">${esc(c.id)} <span class="muted">•</span> ${esc(c.title)}</div>
+                <div class="muted" style="margin-top:8px; font-size:17px;">${esc(c.description)}</div>
+                ${c.prerequisite ? `<div class="muted" style="margin-top:8px; font-size:17px;"><span class="mono">Prerequisite/Corequisite:</span> ${esc(c.prerequisite)}</div>` : ""}
+                <div class="chips">
+                  ${c.tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+                  ${c.credits ? `<span class="chip">${esc(c.credits)} credits</span>` : ""}
+                  <span class="chip">${rs.length} review(s)</span>
+                  <span class="chip">${ls.length} listing(s)</span>
+                  <span class="chip">Rating: ${avgRating.toFixed(1)}/5</span>
+                  <span class="chip">Difficulty: ${avgDifficulty ? avgDifficulty.toFixed(1) : "0.0"}/5</span>
+                  <span class="chip">Book useful: ${usefulnessPct}%</span>
+                  <span class="badge ${tbClass}">Textbook: ${esc(tbText)}</span>
+                  <span class="badge ${wlClass}">Workload: ${esc(wlText)}</span>
+                </div>
+              </div>
+              <div style="min-width:220px; display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+                ${ratingBar(avgRating)}
+                <div class="row" style="justify-content:flex-end;">
+                  <button class="btn primary" data-open-course="${esc(c.id)}">Open course</button>
+                  <button class="btn danger" data-delete-course="${esc(c.id)}">Delete</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        listEl.querySelectorAll("[data-open-course]").forEach(b => {
+          b.addEventListener("click", () => navigate("course", { id: b.dataset.openCourse }));
+        });
+
+        listEl.querySelectorAll("[data-delete-course]").forEach(b => {
+          b.addEventListener("click", () => {
+            const courseId = b.dataset.deleteCourse;
+            const hasLinkedData = store.reviews.some(r => r.courseId === courseId) || store.listings.some(l => l.courseId === courseId);
+            const confirmText = hasLinkedData ? "Deleting this course will also delete its reviews and listings. Continue?" : "Delete this course?";
+            if (confirm(confirmText)) {
+              store.courses = store.courses.filter(c => c.id !== courseId);
+              store.reviews = store.reviews.filter(r => r.courseId !== courseId);
+              store.listings = store.listings.filter(l => l.courseId !== courseId);
+              saveStore(store);
+              paint();
+            }
+          });
+        });
+      }
+
+      filter.addEventListener("input", paint);
+
+      document.getElementById("saveCourse").addEventListener("click", () => {
+        const dept = (document.getElementById("newDept").value || "").trim().toUpperCase();
+        const code = (document.getElementById("newCode").value || "").trim();
+        const title = (document.getElementById("newTitle").value || "").trim();
+        const tagsRaw = (document.getElementById("newTags").value || "").trim();
+        const creditsRaw = (document.getElementById("newCredits").value || "").trim();
+        const prerequisite = (document.getElementById("newPrerequisite").value || "").trim();
+        const description = (document.getElementById("newDescription").value || "").trim();
+        const msg = document.getElementById("courseMsg");
+
+        if (!dept || !code || !title) { msg.innerHTML = `<div class="empty">Department, course number, and title are required.</div>`; return; }
+        const id = `${dept}-${code}`;
+        if (store.courses.some(c => c.id.toLowerCase() === id.toLowerCase())) { msg.innerHTML = `<div class="empty">That course already exists.</div>`; return; }
+
+        const tags = tagsRaw ? tagsRaw.split(",").map(t => t.trim()).filter(Boolean) : [dept];
+        const credits = creditsRaw ? Number(creditsRaw) : null;
+
+        store.courses.unshift({ id, title, dept, code, tags, credits, prerequisite, description: description || "Custom course added by student." });
+        saveStore(store);
+
+        document.getElementById("newDept").value = "";
+        document.getElementById("newCode").value = "";
+        document.getElementById("newTitle").value = "";
+        document.getElementById("newTags").value = "";
+        document.getElementById("newCredits").value = "";
+        document.getElementById("newPrerequisite").value = "";
+        document.getElementById("newDescription").value = "";
+        msg.innerHTML = `<div class="empty">Course added successfully.</div>`;
+        paint();
+      });
+
+      paint();
+    }
+
+    function renderCourse(params) {
+      const course = courseById(params.id);
+      if (!course) {
+        app.innerHTML = `
+          <section class="card">
+            <div class="head"><h2 style="font-size:32px; margin:0;">Course not found</h2></div>
+            <div class="body">
+              <div class="empty">That course ID is not in this dataset.</div>
+              <div style="margin-top:12px;"><button class="btn" id="back">Back to courses</button></div>
+            </div>
+          </section>
+        `;
+        document.getElementById("back").onclick = () => navigate("courses");
+        return;
+      }
+
+      const reviews = store.reviews.filter(r => r.courseId === course.id).sort((a, b) => b.createdAt - a.createdAt);
+      const listings = store.listings.filter(l => l.courseId === course.id).sort((a, b) => b.createdAt - a.createdAt);
+      const avgRating = avg(reviews.map(r => r.rating));
+      const avgDifficulty = avg(reviews.map(r => Number(r.difficulty || 0)).filter(Boolean));
+      const avgWorkloadScore = avg(reviews.map(r => Number(r.workloadScore || 0)).filter(Boolean));
+      const usefulCount = reviews.filter(r => String(r.textbookValue || "").toLowerCase() === "yes").length;
+      const usefulnessPct = reviews.length ? Math.round((usefulCount / reviews.length) * 100) : 0;
+      const topTextbook = mostCommon(reviews.map(r => r.textbookUse));
+      const topWorkload = mostCommon(reviews.map(r => r.workload));
+      const [tbClass, tbText] = badgeForTextbookUse(topTextbook);
+      const [wlClass, wlText] = badgeForWorkload(topWorkload);
+
+      app.innerHTML = `
+        <div class="grid">
+          <section class="card">
+            <div class="head">
+              <div>
+                <h2 style="font-size:40px; margin:0;">${esc(course.id)} <span class="muted">•</span> ${esc(course.title)}</h2>
+                <div class="muted" style="margin-top:8px; font-size:18px;">${esc(course.description)}</div>
+                ${course.prerequisite ? `<div class="muted" style="margin-top:8px; font-size:18px;"><span class="mono">Prerequisite/Corequisite:</span> ${esc(course.prerequisite)}</div>` : ""}
+                <div class="chips" style="margin-top:12px;">
+                  ${course.tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+                  ${course.credits ? `<span class="chip">${esc(course.credits)} credits</span>` : ""}
+                  <span class="badge ${tbClass}">Textbook: ${esc(tbText)}</span>
+                  <span class="badge ${wlClass}">Workload: ${esc(wlText)}</span>
+                  <span class="chip">${reviews.length} review(s)</span>
+                  <span class="chip">${listings.length} listing(s)</span>
+                </div>
+              </div>
+              <div style="min-width:220px; text-align:right;">
+                <div class="muted small">Average rating</div>
+                ${ratingBar(avgRating)}
+                <div style="margin-top:12px;" class="row">
+                  <button class="btn" id="addReview">Add review</button>
+                  <button class="btn primary" id="addListing">Add listing</button>
+                </div>
+              </div>
+            </div>
+            <div class="body">
+              <div class="kpiRow" style="margin-bottom:20px;">
+                <div class="kpi"><div class="muted small">Overall rating</div><div class="val">${avgRating.toFixed(1)}/5</div></div>
+                <div class="kpi"><div class="muted small">Difficulty</div><div class="val">${avgDifficulty ? avgDifficulty.toFixed(1) : "0.0"}/5</div></div>
+                <div class="kpi"><div class="muted small">Workload</div><div class="val">${avgWorkloadScore ? avgWorkloadScore.toFixed(1) : "0.0"}/5</div></div>
+              </div>
+
+              <div class="kpiRow" style="margin-bottom:24px;">
+                <div class="kpi"><div class="muted small">Textbook useful</div><div class="val">${usefulnessPct}%</div></div>
+                <div class="kpi"><div class="muted small">Most reported textbook usage</div><div class="val" style="font-size:24px;">${esc(tbText || "Unknown")}</div></div>
+                <div class="kpi"><div class="muted small">Most reported workload</div><div class="val" style="font-size:24px;">${esc(wlText || "Unknown")}</div></div>
+              </div>
+
+              <h3 style="font-size:28px; margin:0;">Reviews</h3>
+              <div class="muted" style="margin-top:8px; font-size:18px;">Structured feedback only. Keep it factual and useful.</div>
+              <div style="margin-top:14px;" class="list">
+                ${reviews.length ? reviews.map(r => {
+                  const [rtbClass, rtbText] = badgeForTextbookUse(r.textbookUse);
+                  const [rwlClass, rwlText] = badgeForWorkload(r.workload);
+                  return `
+                    <div class="item">
+                      <div style="flex:1 1 620px;">
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                          <div style="font-weight:900; font-size:20px;">${esc(r.professor || "Unknown professor")}</div>
+                          <span class="chip">${esc(r.term || "Unknown term")}</span>
+                          <span class="badge ${rtbClass}">Textbook: ${esc(rtbText)}</span>
+                          <span class="badge ${rwlClass}">Workload: ${esc(rwlText)}</span>
+                          <span class="chip">Posted ${esc(formatDate(r.createdAt))}</span>
+                        </div>
+                        <div style="margin-top:10px;">${ratingBar(r.rating)}</div>
+                        <div class="chips" style="margin-top:10px;">
+                          <span class="chip">Difficulty: ${esc(String(r.difficulty || 0))}/5</span>
+                          <span class="chip">Workload: ${esc(String(r.workloadScore || 0))}/5</span>
+                          <span class="chip">Textbook useful: ${String(r.textbookValue || "").toLowerCase() === "yes" ? "Yes" : "No"}</span>
+                        </div>
+                        <div class="muted" style="margin-top:10px; font-size:17px;"><span class="mono">Notes:</span> ${esc(r.notes || "")}</div>
+                        <div class="muted" style="margin-top:8px; font-size:17px;"><span class="mono">Resources:</span> ${esc(r.resources || "")}</div>
+                      </div>
+                      <div><button class="btn danger" data-del-review="${esc(r.id)}">Delete</button></div>
+                    </div>
+                  `;
+                }).join("") : `<div class="empty">No reviews yet. Add the first one.</div>`}
+              </div>
+
+              <div style="margin-top:24px;">
+                <h3 style="font-size:28px; margin:0;">Textbook marketplace</h3>
+                <div class="muted" style="margin-top:8px; font-size:18px;">Listings are peer-to-peer. Meet safely.</div>
+                <div style="margin-top:14px;" class="list">
+                  ${listings.length ? listings.map(l => `
+                    <div class="item">
+                      <div style="flex:1 1 620px;">
+                        <div style="font-weight:900; font-size:20px;">${esc(l.title)}</div>
+                        <div class="chips" style="margin-top:8px;">
+                          <span class="chip">Condition: ${esc(l.condition)}</span>
+                          <span class="chip">Price: $${esc(Number(l.price).toFixed(2))}</span>
+                          <span class="chip">Posted ${esc(formatDate(l.createdAt))}</span>
+                        </div>
+                        <div class="muted" style="margin-top:8px; font-size:17px;"><span class="mono">Notes:</span> ${esc(l.notes || "")}</div>
+                        <div class="muted" style="margin-top:8px; font-size:17px;"><span class="mono">Contact:</span> ${esc(l.contact || "")}</div>
+                      </div>
+                      <div><button class="btn danger" data-del-listing="${esc(l.id)}">Delete</button></div>
+                    </div>
+                  `).join("") : `<div class="empty">No listings yet. Add a listing if you are selling a book.</div>`}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="card">
+            <div class="head">
+              <div>
+                <h3 style="font-size:28px; margin:0;">Course summary</h3>
+                <div class="muted" style="margin-top:8px; font-size:18px;">Computed from student submissions.</div>
+              </div>
+            </div>
+            <div class="body">
+              <div class="kpiRow" style="grid-template-columns:1fr;">
+                <div class="kpi"><div class="muted small">Most reported textbook usage</div><div class="val" style="font-size:24px;">${esc(tbText || "Unknown")}</div></div>
+                <div class="kpi"><div class="muted small">Most reported workload</div><div class="val" style="font-size:24px;">${esc(wlText || "Unknown")}</div></div>
+                <div class="kpi"><div class="muted small">Average rating</div><div class="val" style="font-size:24px;">${avgRating.toFixed(1)}/5</div></div>
+                <div class="kpi"><div class="muted small">Difficulty average</div><div class="val" style="font-size:24px;">${avgDifficulty ? avgDifficulty.toFixed(1) : "0.0"}/5</div></div>
+                <div class="kpi"><div class="muted small">Workload average</div><div class="val" style="font-size:24px;">${avgWorkloadScore ? avgWorkloadScore.toFixed(1) : "0.0"}/5</div></div>
+                <div class="kpi"><div class="muted small">Textbook useful</div><div class="val" style="font-size:24px;">${usefulnessPct}%</div></div>
+              </div>
+              <div style="margin-top:14px;" class="empty">Next build step: lock deletion so students can only remove their own posts and make the homepage preview cards dynamic.</div>
+              <div style="margin-top:12px;"><button class="btn" id="backCourses">Back to courses</button></div>
+            </div>
+          </aside>
+        </div>
+      `;
+
+      document.getElementById("backCourses").onclick = () => navigate("courses");
+      document.getElementById("addReview").onclick = () => navigate("submit", { mode: "review", courseId: course.id });
+      document.getElementById("addListing").onclick = () => navigate("submit", { mode: "listing", courseId: course.id });
+
+      app.querySelectorAll("[data-del-review]").forEach(b => {
+        b.addEventListener("click", () => {
+          const rid = b.dataset.delReview;
+          if (confirm("Delete this review?")) {
+            store.reviews = store.reviews.filter(r => r.id !== rid);
+            saveStore(store);
+            render();
+          }
+        });
+      });
+
+      app.querySelectorAll("[data-del-listing]").forEach(b => {
+        b.addEventListener("click", () => {
+          const lid = b.dataset.delListing;
+          if (confirm("Delete this listing?")) {
+            store.listings = store.listings.filter(l => l.id !== lid);
+            saveStore(store);
+            render();
+          }
+        });
+      });
+    }
+
+    function renderSubmit(params = {}) {
+      const mode = params.mode || "review";
+      const preCourseId = params.courseId || "";
+      const courseOptions = store.courses.slice().sort((a, b) => a.id.localeCompare(b.id)).map(c => `<option value="${esc(c.id)}">${esc(c.id)} - ${esc(c.title)}</option>`).join("");
+
+      app.innerHTML = `
+        <section class="card">
+          <div class="head">
+            <div>
+              <h2 style="font-size:38px; margin:0;">Submit</h2>
+              <div class="muted" style="margin-top:8px; font-size:18px;">Add course intel without personal attacks. Stick to facts and what actually helped.</div>
+            </div>
+            <div class="row">
+              <button class="btn ${mode === "review" ? "primary" : ""}" id="modeReview">Review</button>
+              <button class="btn ${mode === "listing" ? "primary" : ""}" id="modeListing">Listing</button>
+            </div>
+          </div>
+          <div class="body"><div id="formMount"></div></div>
+        </section>
+      `;
+
+      document.getElementById("modeReview").onclick = () => navigate("submit", { mode: "review", courseId: preCourseId });
+      document.getElementById("modeListing").onclick = () => navigate("submit", { mode: "listing", courseId: preCourseId });
+
+      const mount = document.getElementById("formMount");
+
+      if (mode === "listing") {
+        mount.innerHTML = `
+          <div class="split">
+            <div><label>Course</label><select id="courseId"><option value="">Select a course</option>${courseOptions}</select></div>
+            <div><label>Condition</label><select id="condition"><option>Like new</option><option selected>Good</option><option>Fair</option><option>Poor</option></select></div>
+          </div>
+          <div class="split">
+            <div><label>Book title</label><input id="title" placeholder="Example: COMM 217 Textbook" /></div>
+            <div><label>Price (CAD)</label><input id="price" type="number" min="0" step="0.01" placeholder="35.00" /></div>
+          </div>
+          <label>Contact</label>
+          <input id="contact" placeholder="Example: Email, Discord, Instagram" />
+          <label>Notes (optional)</label>
+          <textarea id="notes" placeholder="Example: Includes highlights, pickup near campus"></textarea>
+          <div class="row" style="margin-top:14px; justify-content:flex-end;"><button class="btn primary" id="saveListing">Post listing</button></div>
+          <div id="msg" style="margin-top:12px;"></div>
+        `;
+
+        const courseIdEl = document.getElementById("courseId");
+        if (preCourseId) courseIdEl.value = preCourseId;
+
+        document.getElementById("saveListing").onclick = () => {
+          const courseId = courseIdEl.value;
+          const condition = document.getElementById("condition").value;
+          const title = (document.getElementById("title").value || "").trim();
+          const price = Number(document.getElementById("price").value);
+          const contact = (document.getElementById("contact").value || "").trim();
+          const notes = (document.getElementById("notes").value || "").trim();
+          const msg = document.getElementById("msg");
+
+          if (!courseId) { msg.innerHTML = `<div class="empty">Select a course.</div>`; return; }
+          if (!title) { msg.innerHTML = `<div class="empty">Enter a book title.</div>`; return; }
+          if (!Number.isFinite(price) || price < 0) { msg.innerHTML = `<div class="empty">Enter a valid price.</div>`; return; }
+          if (!contact) { msg.innerHTML = `<div class="empty">Enter a contact method.</div>`; return; }
+
+          store.listings.unshift({ id: cryptoRandomId(), courseId, condition, title, price, contact, notes, createdAt: Date.now() });
+          saveStore(store);
+          msg.innerHTML = `<div class="empty">Listing posted. Opening course page.</div>`;
+          setTimeout(() => navigate("course", { id: courseId }), 350);
+        };
+        return;
+      }
+
+      mount.innerHTML = `
+        <div class="split">
+          <div><label>Course</label><select id="courseId"><option value="">Select a course</option>${courseOptions}</select></div>
+          <div><label>Term</label><input id="term" placeholder="Example: Winter 2026" /></div>
+        </div>
+        <div class="split">
+          <div><label>Professor (optional)</label><input id="professor" placeholder="Example: Prof. Smith" /></div>
+          <div><label>Overall rating</label><select id="rating"><option value="5">5 (Excellent)</option><option value="4" selected>4 (Good)</option><option value="3">3 (Average)</option><option value="2">2 (Below average)</option><option value="1">1 (Poor)</option></select></div>
+        </div>
+        <div class="split">
+          <div><label>Difficulty</label><select id="difficulty"><option value="5">5 Very hard</option><option value="4">4 Hard</option><option value="3" selected>3 Medium</option><option value="2">2 Easy</option><option value="1">1 Very easy</option></select></div>
+          <div><label>Workload score</label><select id="workloadScore"><option value="5">5 Very heavy</option><option value="4">4 Heavy</option><option value="3" selected>3 Medium</option><option value="2">2 Light</option><option value="1">1 Very light</option></select></div>
+        </div>
+        <div class="split">
+          <div><label>Textbook usage</label><select id="textbookUse"><option>Used heavily</option><option>Used occasionally</option><option selected>Barely used</option><option>Not used at all</option></select></div>
+          <div><label>Textbook useful?</label><select id="textbookValue"><option value="yes">Yes</option><option value="no" selected>No</option></select></div>
+        </div>
+        <div class="split">
+          <div><label>Workload label</label><select id="workload"><option>Light</option><option selected>Moderate</option><option>Heavy</option></select></div>
+          <div></div>
+        </div>
+        <label>Notes (what mattered)</label>
+        <textarea id="notes" placeholder="Example: Exams were mostly based on slides. Practice problems mattered more than the readings."></textarea>
+        <label>Resources that helped (optional)</label>
+        <textarea id="resources" placeholder="Example: Tutorials, office hours, practice problems, YouTube playlist, study group."></textarea>
+        <div class="row" style="margin-top:14px; justify-content:flex-end;"><button class="btn primary" id="saveReview">Post review</button></div>
+        <div id="msg" style="margin-top:12px;"></div>
+      `;
+
+      const courseIdEl = document.getElementById("courseId");
+      if (preCourseId) courseIdEl.value = preCourseId;
+
+      document.getElementById("saveReview").onclick = () => {
+        const courseId = courseIdEl.value;
+        const term = (document.getElementById("term").value || "").trim();
+        const professor = (document.getElementById("professor").value || "").trim();
+        const rating = Number(document.getElementById("rating").value);
+        const difficulty = Number(document.getElementById("difficulty").value);
+        const workloadScore = Number(document.getElementById("workloadScore").value);
+        const textbookUse = document.getElementById("textbookUse").value;
+        const textbookValue = document.getElementById("textbookValue").value;
+        const workload = document.getElementById("workload").value;
+        const notes = (document.getElementById("notes").value || "").trim();
+        const resources = (document.getElementById("resources").value || "").trim();
+        const msg = document.getElementById("msg");
+
+        if (!courseId) { msg.innerHTML = `<div class="empty">Select a course.</div>`; return; }
+        if (!term) { msg.innerHTML = `<div class="empty">Enter a term.</div>`; return; }
+        if (!notes) { msg.innerHTML = `<div class="empty">Add notes about what actually mattered.</div>`; return; }
+
+        store.reviews.unshift({
+          id: cryptoRandomId(),
+          courseId,
+          term,
+          professor,
+          rating: clamp(rating, 1, 5),
+          difficulty: clamp(difficulty, 1, 5),
+          workloadScore: clamp(workloadScore, 1, 5),
+          textbookUse,
+          textbookValue,
+          workload,
+          notes,
+          resources,
+          createdAt: Date.now()
+        });
+        saveStore(store);
+        msg.innerHTML = `<div class="empty">Review posted. Opening course page.</div>`;
+        setTimeout(() => navigate("course", { id: courseId }), 350);
+      };
+    }
+
+    function renderAbout() {
+      app.innerHTML = `
+        <section class="card">
+          <div class="head">
+            <div>
+              <h2 style="font-size:38px; margin:0;">About this MVP</h2>
+              <div class="muted" style="margin-top:8px; font-size:18px;">This is a demo front-end you can expand into a real app with a database and authentication.</div>
+            </div>
+            <button class="btn primary" id="goSubmit">Add something</button>
+          </div>
+          <div class="body">
+            <h3 style="font-size:28px; margin:0;">What it does</h3>
+            <div class="muted" style="margin-top:8px; font-size:18px;">Course intel with textbook usage, workload, resources, credits, prerequisites, ratings, and a peer textbook marketplace.</div>
+            <div style="margin-top:16px;" class="empty">
+              <div style="font-weight:800; margin-bottom:8px; color:var(--text);">Next steps if you want this to be real:</div>
+              1) Replace localStorage with a database such as Supabase, Firebase, or Postgres.<br>
+              2) Add real sign-in, ideally Concordia email verification.<br>
+              3) Add moderation tools for flagging and spam prevention.<br>
+              4) Add helpful votes and ownership rules so users can only delete their own content.<br>
+              5) Make the sample homepage cards dynamic instead of static.
+            </div>
+            <div style="margin-top:16px;">
+              <h3 style="font-size:28px; margin:0;">Safety and compliance</h3>
+              <div class="muted" style="margin-top:8px; font-size:18px;">Do not allow textbook PDF uploads. Focus on links to legitimate open resources. Keep reviews factual to reduce harassment and defamation risk.</div>
+            </div>
+          </div>
+        </section>
+      `;
+      document.getElementById("goSubmit").onclick = () => navigate("submit");
+    }
+
+    render();
+  </script>
+</body>
+</html>
